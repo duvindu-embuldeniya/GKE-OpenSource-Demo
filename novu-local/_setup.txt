@@ -1,0 +1,55 @@
+# ── INSTALL ──────────────────────────────────────────────
+
+
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm repo update
+
+
+helm install mongodb bitnami/mongodb --namespace dev --create-namespace --set auth.rootPassword=admin123 --set auth.username=novu --set auth.password=novu123 --set auth.database=novu
+
+
+helm install redis bitnami/redis --namespace dev --set auth.password=NovuRedis2024 --set architecture=standalone
+
+
+kubectl apply -f api-deployment.yaml
+kubectl apply -f api-service.yaml
+kubectl apply -f ws-deployment.yaml
+kubectl apply -f ws-service.yaml
+kubectl apply -f worker-deployment.yaml
+kubectl apply -f dashboard-deployment.yaml
+kubectl apply -f dashboard-service.yaml
+
+
+# Terminal 1
+kubectl port-forward svc/novu-dashboard 4000:4000 -n dev
+
+
+# Terminal 2
+kubectl port-forward svc/novu-api 3000:3000 -n dev
+
+
+# Terminal 3
+kubectl port-forward svc/novu-ws 3002:3002 -n dev
+
+
+
+
+# ── UNINSTALL ─────────────────────────────────────────────
+
+
+Delete all Novu manifests:
+kubectl delete deployment novu-api novu-dashboard novu-worker novu-ws -n dev
+kubectl delete service novu-api novu-dashboard novu-ws -n dev
+
+
+Uninstall Helm releases:
+helm uninstall mongodb -n dev
+helm uninstall redis -n dev
+
+
+Wipe the namespace entirely:
+kubectl delete namespace dev
+
+
+Remove helm repo:
+helm repo remove bitnami

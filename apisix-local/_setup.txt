@@ -1,0 +1,45 @@
+# ── INSTALL ──────────────────────────────────────────────
+
+
+# Step 1 — Add helm repo
+helm repo add apisix https://apache.github.io/apisix-helm-chart
+helm repo update
+
+# Step 2 — Install APISIX
+helm install apisix apisix/apisix --create-namespace --namespace dev
+
+# Step 3 — Wait for pods
+kubectl get pods -n dev -w
+
+# Step 4 — Install Dashboard
+helm install apisix-dashboard apisix/apisix-dashboard --namespace dev
+
+# Step 5 — Wait for dashboard pod
+kubectl get pods -n dev -w
+
+# Step 6 — Port-forward (run each in a separate terminal)
+kubectl port-forward svc/apisix-gateway -n dev 9080:80
+kubectl port-forward svc/apisix-dashboard -n dev 9000:80
+
+# Step 7 — Access
+#   Dashboard → http://localhost:9000  (admin / admin)
+#   Gateway   → http://localhost:9080
+
+
+
+
+# ── UNINSTALL ─────────────────────────────────────────────
+
+
+# Step 1 — Uninstall helm releases
+helm uninstall apisix -n dev
+helm uninstall apisix-dashboard -n dev
+
+# Step 2 — Delete namespace
+kubectl delete namespace dev
+
+# Step 3 — Verify everything gone
+kubectl get all -n dev
+
+# Step 4 — Optional: remove helm repo
+helm repo remove apisix
