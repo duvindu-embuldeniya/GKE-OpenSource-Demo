@@ -55,7 +55,7 @@ spec:
               value: "http://localhost:3000"
             - name: FRONT_BASE_URL
               value: "http://localhost:4000"
-            - name: CORS_ORIGIN
+            - name: CORS_ORIGIN 
               value: "http://localhost:4000"
             - name: HOSTNAME
               value: "0.0.0.0"
