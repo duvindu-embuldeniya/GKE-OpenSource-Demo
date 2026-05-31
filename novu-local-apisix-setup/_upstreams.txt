@@ -1,0 +1,57 @@
+{
+  "nodes": [
+    {
+      "host": "novu-api.dev.svc.cluster.local",
+      "port": 3000,
+      "weight": 1
+    }
+  ],
+  "type": "roundrobin",
+  "scheme": "http",
+  "name": "novu-api-upstream"
+}
+
+
+
+
+
+{
+  "nodes": [
+    {
+      "host": "novu-dashboard.dev.svc.cluster.local",
+      "port": 4000,
+      "weight": 1
+    }
+  ],
+  "timeout": {
+    "connect": 60,
+    "send": 60,
+    "read": 60
+  },
+  "type": "roundrobin",
+  "scheme": "http",
+  "pass_host": "pass",
+  "name": "novu-dashboard-upstream",
+  "keepalive_pool": {
+    "idle_timeout": 60,
+    "requests": 1000,
+    "size": 320
+  }
+}
+
+
+
+
+
+{
+  "nodes": [
+    {
+      "host": "novu-ws.dev.svc.cluster.local",
+      "port": 3002,
+      "weight": 1
+    }
+  ],
+  "type": "roundrobin",
+  "scheme": "http",
+  "name": "novu-ws-upstream"
+}

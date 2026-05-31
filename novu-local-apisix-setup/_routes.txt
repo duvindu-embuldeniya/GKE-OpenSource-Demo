@@ -1,0 +1,70 @@
+{
+  "uris": [
+    "/api/*"
+  ],
+  "name": "novu-api-route",
+  "priority": 10,
+  "methods": [
+    "GET",
+    "POST",
+    "PUT",
+    "DELETE",
+    "PATCH",
+    "OPTIONS",
+    "HEAD"
+  ],
+  "host": "novu.test.internal",
+  "plugins": {
+    "proxy-rewrite": {
+      "regex_uri": [
+        "^/api/(.*)",
+        "/$1"
+      ]
+    }
+  },
+  "upstream_id": "621905670802768642",
+  "status": 1
+}
+
+
+
+
+
+{
+  "uri": "/*",
+  "name": "novu-dashboard-route",
+  "methods": [
+    "GET",
+    "POST",
+    "PUT",
+    "DELETE",
+    "PATCH",
+    "OPTIONS",
+    "HEAD"
+  ],
+  "host": "novu.test.internal",
+  "upstream_id": "621905697629537026",
+  "status": 1
+}
+
+
+
+
+
+{
+  "uris": [
+    "/ws",
+    "/ws/*"
+  ],
+  "name": "novu-ws-route",
+  "priority": 10,
+  "methods": [
+    "GET",
+    "POST",
+    "OPTIONS"
+  ],
+  "host": "novu.test.internal",
+  "upstream_id": "621905733029462786",
+  "enable_websocket": true,
+  "status": 1
+}
