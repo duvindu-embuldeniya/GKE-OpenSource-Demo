@@ -28,7 +28,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
-CSRF_TRUSTED_ORIGINS = ['https://app.duvindu.org']
+CSRF_TRUSTED_ORIGINS = ['https://www.duvindu.org']
 
 
 # Application definition
