@@ -89,21 +89,7 @@ SETUP
 
    Only proceed to Step 10 after curl returns 'ok'. Then close all port-forwards.
 
-10. Apply Ingress
-
-    GCP GCE Ingress does not support wildcard hosts(*). Add each subdomain explicitly.
-
-
-11. Verify Healthy
-
-    Wait ~3 minutes after ingress is applied, then check:
-
-    kubectl describe ingress django-ingress -n dev
-
-    # Expected:
-    # "k8s1-...-dev-apisix-gateway-80-...": "HEALTHY"
-    # "k8s1-...-dev-django-svc-8000-...": "HEALTHY"
-
+10. Apply Ingress with Apisix gateway as a host-unit
 
 
 
